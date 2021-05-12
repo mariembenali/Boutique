@@ -33,13 +33,7 @@ if($_POST){
 	if(empty($_POST['mdp'])){
 		$error .= '<div class="alert alert-danger">Veuillez renseigner un mot de passe</div>';
 	}
-	else{
-		$verif_mdp = preg_match('#^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$#', $_POST['mdp']);
-		
-		if(!$verif_mdp){
-			$error .= '<div class="alert alert-danger">Veuillez renseigner un mot de passe valide</div>';
-		}
-	}
+
 	//WebForce3@
 	
 	
@@ -53,19 +47,8 @@ if($_POST){
 			$error .= '<div class="alert alert-danger">Veuillez renseigner un email valide</div>';
 		}
 		
-		// yakine.hamida@gmail.com
-		// $tab = array('yakine.hamida', 'gmail.com')
 		$tab = explode('@', $_POST['email']);
 		
-		$ext_interdite = array(
-			'yopmail.com',
-			'mailinator.com',
-			'mail.com',
-		);
-		
-		if(in_array($tab[1], $ext_interdite)){
-			$error .= '<div class="alert alert-danger">Veuillez renseigner un email valide</div>';
-		}
 	}
 	
 	if(empty($error)){

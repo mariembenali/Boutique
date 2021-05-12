@@ -16,6 +16,7 @@ extract($_SESSION['membre']);
 
 $page = 'Profil';
 require_once('inc/header.inc.php');
+
 ?>
 <div class="row">
 	<h1>Profil de <?= $pseudo ?></h1>
@@ -38,7 +39,6 @@ require_once('inc/header.inc.php');
 		</p>
 	</div>
 </div>
-<div class="row">
 	<h2>Historique des commandes</h2>
 	<table class="table table-fluid table-dark">
 		<tr>	
@@ -47,32 +47,25 @@ require_once('inc/header.inc.php');
 			<th>Date</th>
 			<th>Statut</th>
 		</tr>
-		<tr>
-			<td>1</td>
-			<td>150€</td>
-			<td>01/01/2019</td>
-			<td>En cours</td>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>150€</td>
-			<td>01/01/2019</td>
-			<td>En cours</td>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>150€</td>
-			<td>01/01/2019</td>
-			<td>En cours</td>
-		</tr>
-		<tr>
-			<td>1</td>
-			<td>150€</td>
-			<td>01/01/2019</td>
-			<td>En cours</td>
-		</tr>
-	</table>
-</div>
+<?php
+
+$id_membre = $_SESSION['membre']['id_membre'];
+$commande = $pdo -> prepare("SELECT * FROM commande WHERE id_membre = $id_membre");
+$commande -> execute();
+
+while ($row = $commande->fetch(PDO::FETCH_ASSOC)){   //Creates a loop to loop through results
+
+		echo"<tr>";
+			echo"<td>"; echo $row['id_commande']; echo "</td>";
+			echo"<td>"; echo $row['montant']; echo "</td>";
+			echo"<td>"; echo $row['date_enregistrement']; echo "</td>";
+			echo"<td>"; echo $row['etat']; echo "</td>";
+		echo "</tr>";
+		
+		}
+
+echo "</table>";
+?>
 
 
 <?php

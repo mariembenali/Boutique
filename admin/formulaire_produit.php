@@ -3,8 +3,6 @@
 
 require_once('../inc/init.inc.php');
 
-debug($_POST);
-debug($_FILES);
 
 if($_POST){
 	
