@@ -65,7 +65,7 @@ require_once('inc/header.inc.php');
 			<img src="photo/<?= $photo ?>" alt="" class="img-responsive"><hr>
 			<p class="text-center">Catégorie : <?= $categorie ?></p>
 			<p class="text-center">Couleur : <?= $couleur ?></p>
-			<p class="text-center">Taille : <?= $taille ?></p>
+			<p class="text-center">poids : <?= $poids ?></p>
 			<p class="text-center">Description :<?= $description ?></p>
 			<p class="text-center">Prix : <?= number_format($prix, 2, ',', ' ') ?> €</p><hr>
 			

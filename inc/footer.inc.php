@@ -1,6 +1,6 @@
 	</div><!-- /.container -->
 	<footer>
-		Plan du site (c) 2021
+		Projet PHP MP2L 1ere année 2021
 	</footer>
 	    <!-- Bootstrap core JavaScript
     ================================================== -->

@@ -58,13 +58,13 @@ if($_POST){
 		if(isset($_POST['id_produit']) && !empty($_POST['id_produit'])){
 			// S'il y a un id_produit renseigné (caché) dans le formulaire alors on est dans la modification de produit et non dans l'ajout d'un produit.
 			// DONC requête UPDATE
-			$resultat = $pdo -> prepare("UPDATE produit set reference = :reference, categorie = :categorie, titre = :titre, description = :description, couleur = :couleur, taille = :taille, public = :public, photo = :photo, prix = :prix, stock = :stock WHERE id_produit = :id ");
+			$resultat = $pdo -> prepare("UPDATE produit set reference = :reference, categorie = :categorie, titre = :titre, description = :description, couleur = :couleur, poids = :poids, public = :public, photo = :photo, prix = :prix, stock = :stock WHERE id_produit = :id ");
 			
 			$resultat -> bindParam(':id', $_POST['id_produit'], PDO::PARAM_INT);
 		}
 		else{
 			// Si l'id_produit du formulaire est vide cela signifie que nous sommes en train d'ajouter un produit
-			$resultat = $pdo -> prepare("INSERT INTO produit (reference, categorie, titre, description, couleur, taille, public, photo, prix, stock) VALUES (:reference, :categorie, :titre, :description, :couleur, :taille, :public, :photo, :prix, :stock)");
+			$resultat = $pdo -> prepare("INSERT INTO produit (reference, categorie, titre, description, couleur, poids, public, photo, prix, stock) VALUES (:reference, :categorie, :titre, :description, :couleur, :poids, :public, :photo, :prix, :stock)");
 		}	
 		
 		//STR
@@ -73,7 +73,7 @@ if($_POST){
 		$resultat -> bindParam(':titre', $_POST['titre'], PDO::PARAM_STR);
 		$resultat -> bindParam(':description', $_POST['description'], PDO::PARAM_STR);
 		$resultat -> bindParam(':couleur', $_POST['couleur'], PDO::PARAM_STR);
-		$resultat -> bindParam(':taille', $_POST['taille'], PDO::PARAM_STR);
+		$resultat -> bindParam(':poids', $_POST['poids'], PDO::PARAM_STR);
 		$resultat -> bindParam(':public', $_POST['public'], PDO::PARAM_STR);
 		// Attention pas de photo en post
 		$resultat -> bindParam(':photo', $photo_bdd, PDO::PARAM_STR);
@@ -117,7 +117,7 @@ $reference = (isset($produit_a_modifier)) ? $produit_a_modifier['reference'] : '
 $categorie = (isset($produit_a_modifier)) ? $produit_a_modifier['categorie'] : '';
 $titre = (isset($produit_a_modifier)) ? $produit_a_modifier['titre'] : '';
 $description = (isset($produit_a_modifier)) ? $produit_a_modifier['description'] : '';
-$taille = (isset($produit_a_modifier)) ? $produit_a_modifier['taille'] : '';
+$poids = (isset($produit_a_modifier)) ? $produit_a_modifier['poids'] : '';
 $couleur = (isset($produit_a_modifier)) ? $produit_a_modifier['couleur'] : '';
 $public = (isset($produit_a_modifier)) ? $produit_a_modifier['public'] : '';
 $photo = (isset($produit_a_modifier)) ? $produit_a_modifier['photo'] : '';
@@ -171,8 +171,8 @@ require_once('../inc/header.inc.php');
 					<textarea class="form-control" name="description"/><?= $description ?></textarea>
 				</div>
 				<div class="form-group">
-					<label>Taille :</label>
-					<input type="text" class="form-control" name="taille" value="<?= $taille ?>"/>
+					<label>poids :</label>
+					<input type="text" class="form-control" name="poids" value="<?= $poids ?>"/>
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -215,6 +215,3 @@ require_once('../inc/header.inc.php');
 		</form>
 	</div>
 </div>
-<?php
-require_once('../inc/footer.inc.php');
-?>
